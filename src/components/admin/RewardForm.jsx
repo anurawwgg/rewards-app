@@ -61,33 +61,35 @@ export default function RewardForm({ reward, onDone }) {
     }
   }
 
+  const inputClass = 'w-full px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent'
+
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-xs font-medium text-gray-600 mb-1">Reward Name</label>
+        <label className="block text-xs font-medium text-brand-600 mb-1">Reward Name</label>
         <input
           type="text"
           value={form.name}
           onChange={update('name')}
           placeholder="Free Coffee"
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className={inputClass}
         />
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-gray-600 mb-1">Description (optional)</label>
+        <label className="block text-xs font-medium text-brand-600 mb-1">Description (optional)</label>
         <input
           type="text"
           value={form.description}
           onChange={update('description')}
           placeholder="One free cup of filter coffee"
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className={inputClass}
         />
       </div>
 
       <div>
-        <label className="block text-xs font-medium text-gray-600 mb-1">Points Required</label>
+        <label className="block text-xs font-medium text-brand-600 mb-1">Points Required</label>
         <input
           type="number"
           min="1"
@@ -96,7 +98,7 @@ export default function RewardForm({ reward, onDone }) {
           onChange={update('points_required')}
           placeholder="500"
           required
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className={inputClass}
         />
       </div>
 
@@ -105,13 +107,13 @@ export default function RewardForm({ reward, onDone }) {
           type="checkbox"
           checked={form.is_active}
           onChange={e => setForm(prev => ({ ...prev, is_active: e.target.checked }))}
-          className="rounded border-gray-300 text-brand-600 focus:ring-brand-500"
+          className="rounded border-brand-300 text-brand-600 focus:ring-brand-600"
         />
-        <span className="text-sm text-gray-700">Active (visible to customers)</span>
+        <span className="text-sm text-brand-700">Active (visible to customers)</span>
       </label>
 
       {error && (
-        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+        <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -121,14 +123,14 @@ export default function RewardForm({ reward, onDone }) {
           type="button"
           onClick={onDone}
           disabled={loading}
-          className="flex-1 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50"
+          className="flex-1 py-2 border border-brand-300 rounded-full text-sm font-medium text-brand-700 hover:bg-brand-200 transition-colors"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={loading}
-          className="flex-1 py-2 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 disabled:opacity-60"
+          className="flex-1 py-2 bg-brand-600 text-brand-50 text-sm font-medium rounded-full hover:bg-brand-900 disabled:opacity-60 transition-colors"
         >
           {loading ? 'Saving…' : reward ? 'Save Changes' : 'Add Reward'}
         </button>

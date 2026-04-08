@@ -60,17 +60,18 @@ export default function Signup() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 py-8">
+    <div className="min-h-screen bg-brand-50 flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-brand-700">Loyalty Rewards</h1>
-          <p className="text-gray-500 mt-1">Create your account</p>
+          <div className="text-6xl mb-3">☕</div>
+          <h1 className="font-display text-3xl font-bold text-brand-900">Bean &amp; Brew Rewards</h1>
+          <p className="text-brand-600 mt-2 text-sm italic">Every sip earns a reward</p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+        <div className="bg-brand-100 rounded-2xl shadow-sm border border-brand-200 p-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-brand-900 mb-1">
                 Full Name
               </label>
               <input
@@ -79,12 +80,12 @@ export default function Signup() {
                 onChange={update('name')}
                 placeholder="Priya Sharma"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-brand-900 mb-1">
                 Mobile Number
               </label>
               <input
@@ -94,12 +95,12 @@ export default function Signup() {
                 placeholder="9876543210"
                 required
                 maxLength={10}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-brand-900 mb-1">
                 Password
               </label>
               <input
@@ -108,12 +109,12 @@ export default function Signup() {
                 onChange={update('password')}
                 placeholder="••••••••"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label className="block text-sm font-medium text-brand-900 mb-1">
                 Confirm Password
               </label>
               <input
@@ -122,12 +123,12 @@ export default function Signup() {
                 onChange={update('confirm')}
                 placeholder="••••••••"
                 required
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent"
+                className="w-full px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
               />
             </div>
 
             {error && (
-              <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+              <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
                 {error}
               </p>
             )}
@@ -135,16 +136,16 @@ export default function Signup() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-2.5 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 disabled:opacity-60 transition-colors"
+              className="w-full py-2.5 bg-brand-600 text-brand-50 font-medium rounded-full hover:bg-brand-900 disabled:opacity-60 transition-colors"
             >
-              {loading ? 'Creating account…' : 'Create Account'}
+              {loading ? 'Creating account…' : '☕ Create Account'}
             </button>
           </form>
         </div>
 
-        <p className="text-center text-sm text-gray-500 mt-4">
+        <p className="text-center text-sm text-brand-600 mt-4">
           Already have an account?{' '}
-          <Link to="/login" className="text-brand-600 font-medium hover:underline">
+          <Link to="/login" className="text-brand-900 font-semibold hover:underline">
             Sign in
           </Link>
         </p>

@@ -27,20 +27,20 @@ export default function Dashboard() {
 
   if (profileLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-brand-500 border-t-transparent rounded-full animate-spin" />
+      <div className="min-h-screen bg-brand-50 flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-brand-600 border-t-transparent rounded-full animate-spin" />
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-brand-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100 px-4 py-3 flex items-center justify-between sticky top-0 z-10">
-        <h1 className="text-lg font-bold text-brand-700">Loyalty Rewards</h1>
+      <header className="bg-brand-100 border-b border-brand-200 px-4 py-3 flex items-center justify-between sticky top-0 z-10">
+        <h1 className="font-display text-lg font-bold text-brand-900">Bean &amp; Brew Rewards</h1>
         <button
           onClick={signOut}
-          className="text-sm text-gray-500 hover:text-gray-700 font-medium"
+          className="text-sm text-brand-600 hover:text-brand-900 font-medium transition-colors"
         >
           Sign out
         </button>
@@ -54,20 +54,27 @@ export default function Dashboard() {
         />
 
         {/* Tab nav */}
-        <div className="flex gap-1 bg-gray-100 rounded-xl p-1">
+        <div className="flex gap-1 bg-brand-100 rounded-xl p-1 border border-brand-200">
           {TABS.map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`flex-1 py-2 text-sm font-medium rounded-lg transition-colors ${
                 activeTab === tab
-                  ? 'bg-white text-gray-800 shadow-sm'
-                  : 'text-gray-500 hover:text-gray-700'
+                  ? 'bg-brand-900 text-brand-50 shadow-sm'
+                  : 'text-brand-600 hover:text-brand-900'
               }`}
             >
               {tab}
             </button>
           ))}
+        </div>
+
+        {/* Coffee cup divider */}
+        <div className="flex items-center gap-3">
+          <div className="flex-1 h-px bg-brand-200" />
+          <span className="text-brand-400 text-sm">☕</span>
+          <div className="flex-1 h-px bg-brand-200" />
         </div>
 
         {/* Tab content */}
@@ -76,7 +83,7 @@ export default function Dashboard() {
             {rewardsLoading ? (
               <Spinner />
             ) : rewards.length === 0 ? (
-              <p className="text-center text-gray-400 py-8 text-sm">
+              <p className="text-center text-brand-400 py-8 text-sm">
                 No rewards available right now.
               </p>
             ) : (
@@ -105,7 +112,7 @@ export default function Dashboard() {
             {redemptionsLoading ? (
               <Spinner />
             ) : redemptions.length === 0 ? (
-              <p className="text-center text-gray-400 py-8 text-sm">
+              <p className="text-center text-brand-400 py-8 text-sm">
                 You haven&apos;t redeemed any rewards yet.
               </p>
             ) : (
@@ -113,19 +120,19 @@ export default function Dashboard() {
                 {redemptions.map(r => (
                   <div
                     key={r.id}
-                    className="flex items-center justify-between bg-white rounded-xl px-4 py-3 border border-gray-100 shadow-sm"
+                    className="flex items-center justify-between bg-brand-100 rounded-xl px-4 py-3 border border-brand-200 shadow-sm"
                   >
                     <div>
-                      <p className="font-medium text-gray-800 text-sm">{r.reward_name}</p>
-                      <p className="text-gray-400 text-xs mt-0.5">
+                      <p className="font-medium text-brand-900 text-sm">{r.reward_name}</p>
+                      <p className="text-brand-400 text-xs mt-0.5">
                         {new Date(r.created_at).toLocaleDateString('en-IN', {
                           day: 'numeric', month: 'short', year: 'numeric',
                         })}
                       </p>
                     </div>
                     <div className="text-right">
-                      <p className="text-red-500 font-bold text-sm">−{r.points_spent}</p>
-                      <p className="text-gray-400 text-xs">pts</p>
+                      <p className="text-red-600 font-bold text-sm">−{r.points_spent}</p>
+                      <p className="text-brand-400 text-xs">pts</p>
                     </div>
                   </div>
                 ))}
@@ -149,7 +156,7 @@ export default function Dashboard() {
 function Spinner() {
   return (
     <div className="flex justify-center py-8">
-      <div className="w-6 h-6 border-4 border-brand-400 border-t-transparent rounded-full animate-spin" />
+      <div className="w-6 h-6 border-4 border-brand-600 border-t-transparent rounded-full animate-spin" />
     </div>
   )
 }

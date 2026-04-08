@@ -50,40 +50,40 @@ export default function CustomerSearch() {
           onChange={e => setQuery(e.target.value)}
           placeholder="Search by mobile number…"
           required
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className="flex-1 px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
         />
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-gray-800 text-white text-sm font-medium rounded-lg hover:bg-gray-900 disabled:opacity-60"
+          className="px-4 py-2 bg-brand-900 text-brand-50 text-sm font-medium rounded-full hover:bg-brand-600 disabled:opacity-60 transition-colors"
         >
           {loading ? 'Searching…' : 'Search'}
         </button>
       </form>
 
       {notFound && (
-        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+        <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
           No customer found with that mobile number.
         </p>
       )}
 
       {customer && (
-        <div className="bg-white border border-gray-200 rounded-xl p-4 shadow-sm">
+        <div className="bg-brand-100 border border-brand-200 rounded-xl p-4 shadow-sm">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-semibold text-gray-800">{customer.name}</p>
-              <p className="text-gray-500 text-sm">{customer.mobile_number}</p>
+              <p className="font-semibold text-brand-900">{customer.name}</p>
+              <p className="text-brand-600 text-sm">{customer.mobile_number}</p>
             </div>
             <div className="text-right">
-              <p className="text-2xl font-bold text-brand-600">
+              <p className="font-display text-2xl font-bold text-brand-600">
                 {(customerPoints ?? customer.total_points).toLocaleString('en-IN')}
               </p>
-              <p className="text-gray-400 text-xs">points</p>
+              <p className="text-brand-400 text-xs">points</p>
             </div>
           </div>
 
-          <hr className="my-4 border-gray-100" />
-          <p className="text-sm font-medium text-gray-700">Add Purchase</p>
+          <hr className="my-4 border-brand-200" />
+          <p className="text-sm font-medium text-brand-900">Add Purchase</p>
           <AddPurchaseForm customer={customer} onSuccess={refreshCustomer} />
         </div>
       )}

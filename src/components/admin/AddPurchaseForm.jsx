@@ -57,11 +57,13 @@ export default function AddPurchaseForm({ customer, onSuccess }) {
     onSuccess()
   }
 
+  const inputClass = 'w-full px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent'
+
   return (
     <form onSubmit={handleSubmit} className="space-y-3 mt-4">
       <div className="flex gap-3">
         <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-600 mb-1">Amount (₹)</label>
+          <label className="block text-xs font-medium text-brand-600 mb-1">Amount (₹)</label>
           <input
             type="number"
             min="1"
@@ -70,26 +72,26 @@ export default function AddPurchaseForm({ customer, onSuccess }) {
             onChange={e => setAmount(e.target.value)}
             placeholder="500"
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className={inputClass}
           />
           {amount && (
             <p className="text-xs text-brand-600 mt-1">= {pointsPreview} points</p>
           )}
         </div>
         <div className="flex-1">
-          <label className="block text-xs font-medium text-gray-600 mb-1">Description</label>
+          <label className="block text-xs font-medium text-brand-600 mb-1">Description</label>
           <input
             type="text"
             value={description}
             onChange={e => setDescription(e.target.value)}
             placeholder="e.g. Grocery purchase"
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
+            className={inputClass}
           />
         </div>
       </div>
 
       {error && (
-        <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+        <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
           {error}
         </p>
       )}
@@ -102,7 +104,7 @@ export default function AddPurchaseForm({ customer, onSuccess }) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-2.5 bg-brand-600 text-white text-sm font-medium rounded-lg hover:bg-brand-700 disabled:opacity-60 transition-colors"
+        className="w-full py-2.5 bg-brand-600 text-brand-50 text-sm font-medium rounded-full hover:bg-brand-900 disabled:opacity-60 transition-colors"
       >
         {loading ? 'Saving…' : 'Add Purchase & Credit Points'}
       </button>
