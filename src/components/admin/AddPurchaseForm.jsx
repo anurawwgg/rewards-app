@@ -24,7 +24,6 @@ export default function AddPurchaseForm({ customer, onSuccess }) {
     const pointsEarned = Math.floor(amountNum * 10)
     setLoading(true)
 
-    // Insert purchase row
     const { error: insertError } = await supabase.from('purchases').insert({
       customer_id: customer.id,
       amount_spent: amountNum,
@@ -38,32 +37,35 @@ export default function AddPurchaseForm({ customer, onSuccess }) {
       return
     }
 
-    // Atomically add points to the customer's balance
     const { error: rpcError } = await supabase.rpc('add_points', {
       customer_id: customer.id,
       delta: pointsEarned,
     })
 
-    setLoading(false)
-
     if (rpcError) {
+      setLoading(false)
       setError('Purchase saved but points update failed. Contact support.')
       return
     }
 
+    // Increment stamp count by 1
+    await supabase.rpc('add_stamp', { p_customer_id: customer.id })
+
+    setLoading(false)
     setAmount('')
     setDescription('')
-    setSuccessMsg(`✓ Added ₹${amountNum.toLocaleString('en-IN')} purchase — ${pointsEarned} pts credited to ${customer.name}`)
+    setSuccessMsg(`✓ ₹${amountNum.toLocaleString('en-IN')} — ${pointsEarned} pts credited to ${customer.name}`)
     onSuccess()
   }
 
-  const inputClass = 'w-full px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent'
+  const inputClass = 'w-full px-3 py-2 border border-brand-200 bg-brand-50 text-brand-900 placeholder-brand-300 text-sm focus:outline-none focus:border-brand-600 transition-colors'
+  const labelClass = 'block font-label text-brand-400 text-xs tracking-widest uppercase mb-1'
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 mt-4">
+    <form onSubmit={handleSubmit} className="space-y-3">
       <div className="flex gap-3">
         <div className="flex-1">
-          <label className="block text-xs font-medium text-brand-600 mb-1">Amount (₹)</label>
+          <label className={labelClass}>Amount (₹)</label>
           <input
             type="number"
             min="1"
@@ -75,38 +77,34 @@ export default function AddPurchaseForm({ customer, onSuccess }) {
             className={inputClass}
           />
           {amount && (
-            <p className="text-xs text-brand-600 mt-1">= {pointsPreview} points</p>
+            <p className="font-label text-brand-600 text-xs tracking-wider mt-1">= {pointsPreview} pts</p>
           )}
         </div>
         <div className="flex-1">
-          <label className="block text-xs font-medium text-brand-600 mb-1">Description</label>
+          <label className={labelClass}>Description</label>
           <input
             type="text"
             value={description}
             onChange={e => setDescription(e.target.value)}
-            placeholder="e.g. Grocery purchase"
+            placeholder="e.g. Cappuccino"
             className={inputClass}
           />
         </div>
       </div>
 
       {error && (
-        <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
-          {error}
-        </p>
+        <p className="text-xs text-red-400 border border-red-900 bg-red-950/40 px-3 py-2 font-label tracking-wider">{error}</p>
       )}
       {successMsg && (
-        <p className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-3 py-2">
-          {successMsg}
-        </p>
+        <p className="text-xs text-green-600 border border-green-200 bg-green-50 px-3 py-2 font-label tracking-wider">{successMsg}</p>
       )}
 
       <button
         type="submit"
         disabled={loading}
-        className="w-full py-2.5 bg-brand-600 text-brand-50 text-sm font-medium rounded-full hover:bg-brand-900 disabled:opacity-60 transition-colors"
+        className="w-full py-2.5 bg-brand-600 text-brand-900 font-label text-xs tracking-[0.3em] uppercase hover:bg-brand-700 disabled:opacity-60 transition-colors"
       >
-        {loading ? 'Saving…' : 'Add Purchase & Credit Points'}
+        {loading ? 'Saving…' : 'Credit Points'}
       </button>
     </form>
   )

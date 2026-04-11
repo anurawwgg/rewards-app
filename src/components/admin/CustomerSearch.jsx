@@ -42,49 +42,50 @@ export default function CustomerSearch() {
   }
 
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSearch} className="flex gap-3">
+    <div className="space-y-5">
+      <form onSubmit={handleSearch} className="flex gap-2">
         <input
           type="tel"
           value={query}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search by mobile number…"
           required
-          className="flex-1 px-3 py-2 border border-brand-300 rounded-lg bg-brand-50 text-brand-900 placeholder-brand-400 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600 focus:border-transparent"
+          className="flex-1 px-3 py-2 border border-brand-200 bg-brand-50 text-brand-900 placeholder-brand-300 text-sm focus:outline-none focus:border-brand-600 transition-colors"
         />
         <button
           type="submit"
           disabled={loading}
-          className="px-4 py-2 bg-brand-900 text-brand-50 text-sm font-medium rounded-full hover:bg-brand-600 disabled:opacity-60 transition-colors"
+          className="px-5 py-2 bg-brand-900 text-brand-100 font-label text-xs tracking-[0.3em] uppercase hover:bg-brand-800 disabled:opacity-60 transition-colors"
         >
-          {loading ? 'Searching…' : 'Search'}
+          {loading ? '…' : 'Search'}
         </button>
       </form>
 
       {notFound && (
-        <p className="text-sm text-red-700 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+        <p className="text-xs text-red-400 border border-red-900 bg-red-950/40 px-3 py-2 font-label tracking-wider">
           No customer found with that mobile number.
         </p>
       )}
 
       {customer && (
-        <div className="bg-brand-100 border border-brand-200 rounded-xl p-4 shadow-sm">
-          <div className="flex items-center justify-between">
+        <div className="border border-brand-200 bg-brand-100">
+          <div className="flex items-center justify-between px-4 py-4">
             <div>
-              <p className="font-semibold text-brand-900">{customer.name}</p>
-              <p className="text-brand-600 text-sm">{customer.mobile_number}</p>
+              <p className="font-serif text-brand-900">{customer.name}</p>
+              <p className="font-label text-brand-400 text-xs tracking-wider mt-0.5">{customer.mobile_number}</p>
             </div>
             <div className="text-right">
-              <p className="font-display text-2xl font-bold text-brand-600">
+              <p className="font-display text-brand-600 text-3xl leading-none">
                 {(customerPoints ?? customer.total_points).toLocaleString('en-IN')}
               </p>
-              <p className="text-brand-400 text-xs">points</p>
+              <p className="font-label text-brand-400 text-xs tracking-widest uppercase">points</p>
             </div>
           </div>
 
-          <hr className="my-4 border-brand-200" />
-          <p className="text-sm font-medium text-brand-900">Add Purchase</p>
-          <AddPurchaseForm customer={customer} onSuccess={refreshCustomer} />
+          <div className="border-t border-brand-200 px-4 py-4">
+            <p className="font-label text-brand-400 text-xs tracking-[0.3em] uppercase mb-3">Add Purchase</p>
+            <AddPurchaseForm customer={customer} onSuccess={refreshCustomer} />
+          </div>
         </div>
       )}
     </div>

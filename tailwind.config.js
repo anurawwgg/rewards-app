@@ -8,20 +8,23 @@ export default {
     extend: {
       colors: {
         brand: {
-          50:  '#F5E6D3',  // page background — warm cappuccino
-          100: '#EDD9C0',  // card/surface background — cream
-          200: '#D4B896',
-          300: '#BA9470',
-          400: '#A07050',
-          500: '#8B5A3C',
-          600: '#6B3F1F',  // primary accent / secondary text
-          700: '#5A3418',
-          800: '#4A2910',
-          900: '#3B1F0A',  // espresso — primary text / button hover
+          50:  '#f5efe3',  // Cream — page background
+          100: '#fdfaf5',  // Off-white — card surfaces
+          200: '#d9cfc0',  // Steam — borders, dividers
+          300: '#c8b8a8',  // mid tone
+          400: '#9a8070',  // muted text
+          500: '#c4722a',  // Caramel (alias for 600)
+          600: '#c4722a',  // Caramel — primary action / accent
+          700: '#a85e20',  // darker caramel — hover states
+          800: '#2b1a0e',  // Espresso
+          900: '#0e0b07',  // Ink — primary dark
         },
+        gold: '#e8b84b',
       },
       fontFamily: {
-        display: ['"Playfair Display"', 'Georgia', 'serif'],
+        display: ['"Bebas Neue"', 'Impact', 'sans-serif'],
+        serif:   ['"DM Serif Display"', 'Georgia', 'serif'],
+        label:   ['"DM Mono"', 'monospace'],
       },
     },
   },
